@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter-tight);
+  --font-serif: var(--font-instrument-serif);
+  --color-paper: #f3f1ec;
+  --color-card: #ffffff;
+  --color-ink: #121212;
+  --color-soft: #5d5b57;
+  --color-line: #e3e0d8;
+  --color-orbit: #2f45ff;
+  --color-orbit-deep: #1a2499;
+  --color-lilac: #dcd6ff;
+  --color-mint: #9ef0c2;
+  --color-sun: #ffd66b;
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-orbit);
+  color: white;
+}
+
+.serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spin 40s linear infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee 30s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-slow,
+  .rise,
+  .reveal,
+  .marquee {
+    animation: none !important;
+  }
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float {
+    animation: none !important;
+  }
+}
